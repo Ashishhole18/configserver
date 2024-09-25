@@ -5,22 +5,22 @@ pipeline {
 
     stages {
         stage('GIT CLONE') {
-            step {
+            steps {
                 git 'https://github.com/Ashishhole18/configserver'
             }
         }
         stage('Compile-Package') {
-            step {
+            steps {
             sh 'mvn clean package'
             }
         }
         stage('Dockerized app') {
-            step {
+            steps {
                 sh 'docker build -t config-server .'
             }
         }
         stage('Deploy') {
-            step {
+            steps {
                 sh 'docker run -d -p 8088:8088 config-server'
             }
         }
